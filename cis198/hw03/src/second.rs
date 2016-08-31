@@ -21,6 +21,14 @@ impl<T> Iterator for IntoIter<T> where T:Ord {
     }
 }
 
+impl<T> IntoIterator for BST<T> where T:Ord {
+    type Item = T;
+    type IntoIter = IntoIter<T>;
+    fn into_iter(self) -> Self::IntoIter {
+        IntoIter(self)
+    }
+}
+
 impl<T> BST<T> where T:Ord {
     pub fn new() -> Self {
         BST{root: None}
@@ -95,10 +103,6 @@ impl<T> BST<T> where T:Ord {
                 false
             }
         }
-    }
-
-    pub fn into_iter(self) -> IntoIter<T> {
-        IntoIter(self)
     }
 
     pub fn get_rightmost(&mut self) -> Option<T>{
@@ -185,5 +189,19 @@ mod test {
         assert_eq!(iter.next(), Some(10));
         assert_eq!(iter.next(), Some(5));
         assert_eq!(iter.next(), None);
+    }
+
+    #[test]
+    fn into_iter_for_loop() {
+        let mut bst = BST::new();
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(10);
+        bst.insert(15);
+        let mut results = vec![];
+        for elt in bst {
+            results.push(elt);
+        }
+        assert_eq!(results, vec![15,10,5]);
     }
 }
