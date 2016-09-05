@@ -14,6 +14,20 @@ struct Node<T> {
 
 pub struct IntoIter<T>(BST<T>);
 
+pub struct Iter<'a, T:'a> {
+    next: Option<&'a Node<T>>,
+}
+
+impl<'a, T> Iterator for Iter<'a, T> where T:Ord {
+    type Item = &'a T;
+    fn next(& mut self) -> Option<Self::Item> {
+        self.next.map(|node| {
+            self.next = node.right.as_ref().map(|node| &**node);
+            &node.elem
+        })
+    }
+}
+
 impl<T> Iterator for IntoIter<T> where T:Ord {
     type Item = T;
     fn next(&mut self) -> Option<Self::Item> {
@@ -124,6 +138,10 @@ impl<T> BST<T> where T:Ord {
             })
         }
     }
+
+    pub fn iter<'a>(&'a self) -> Iter<'a, T> {
+        Iter {next: self.root.as_ref().map(|node| &**node)}
+    }
 }
 
 #[cfg(test)]
@@ -203,5 +221,19 @@ mod test {
             results.push(elt);
         }
         assert_eq!(results, vec![15,10,5]);
+    }
+
+    #[test]
+    fn iter_basic() {
+        let mut bst = BST::new();
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(10);
+        bst.insert(15);
+        let mut iter = bst.iter();
+        assert_eq!(iter.next(), Some(&5));
+        assert_eq!(iter.next(), Some(&10));
+        assert_eq!(iter.next(), Some(&15));
+        assert_eq!(iter.next(), None);
     }
 }
