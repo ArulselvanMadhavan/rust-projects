@@ -4,3 +4,7 @@ version = "0.1.0"
 authors = ["Madhavan, Arulselvan <arulselvan1234@gmail.com>"]
 
 [dependencies]
+itertools = "*"
+serde = "*"
+serde_json = "*"
+serde_derive = "*"
