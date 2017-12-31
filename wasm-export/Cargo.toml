@@ -1,0 +1,6 @@
+[package]
+name = "wasm-export"
+version = "0.1.0"
+authors = ["Madhavan, Arulselvan <arulselvan1234@gmail.com>"]
+
+[dependencies]
