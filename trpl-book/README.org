@@ -9,10 +9,72 @@
      rustup component add rustfmt-preview
      #+END_SRC
    - Install ~rust-mode~ for emacs
-     #+BEGIN_SRC emacs-Lisp
-       (use-package rust-mode
-         :config
-         (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-         (setq rust-format-on-save t))
+     #+BEGIN_SRC emacs-lisp
+     (use-package rust-mode
+       :config
+       (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+       (setq rust-format-on-save t))
      #+END_SRC
    - [[https://github.com/ArulselvanMadhavan/dotfiles/blob/master/.emacs.d/configs/rust-configs.el][Link to emacs configs for rust programming]]
+   - Install ~cargo-mode~ for emacs. Nice cheatsheet available [[https://github.com/kwrooijen/cargo.el#usage][here]].
+     #+BEGIN_SRC emacs-lisp
+     ;; Cargo setup
+     (use-package cargo
+       :config
+       (add-hook 'rust-mode-hook 'cargo-minor-mode)
+       (add-hook 'toml-mode-hook 'cargo-minor-mode))     
+     #+END_SRC
+   - Install ~toml-mode~ for emacs
+     #+BEGIN_SRC emacs-lisp
+     ;; toml setup
+     (use-package toml-mode)
+     #+END_SRC
+** Cargo
+   - Cargo saves the executable in ~target/debug/~ by default
+   - ~cargo check~ - Just compiles
+   - ~cargo build~ - Compiles and creates an executable
+   - ~cargo run~   - Compiles(if changes were made since last
+     ~build~), creates an executable and runs the executable.
+   - ~cargo build~ vs ~cargo build --release~
+     - ~--release~ compiles the project with optimizations.
+     - compiles longer but produces faster code.
+     - ~target/release~ contains the executable for releases.
+** Rustup
+   - Rust ecosystem toolchain installer.
+   - Cheatsheet [[https://github.com/rust-lang-nursery/rustup.rs#examples][link]]
+   - ~$HOME/.rustup~ is the base directory for rustup. All toolchains,
+     components, are installed here.
+** Racer
+   - ~Racer~ is rust ecosystem's code completion tool.
+   - ~Racer~ needs rust source code to work.
+     #+BEGIN_SRC shell
+     rustup component add rust-src
+     #+END_SRC
+   - The above command installs in the active toolchain directory(~/.rustup~)
+   - Add the following in your ~/.profile
+     #+BEGIN_SRC shell
+     export RUST_SRC_HOME=`rustc --print sysroot`
+     export RUST_SRC_PATH="$RUST_SRC_HOME/lib/rustlib/src/rust/src"
+     export PATH="$PATH:$RUST_SRC_PATH"
+     #+END_SRC
+   - Install ~racer-mode~ in emacs.
+     #+BEGIN_SRC emacs-lisp
+     (use-package racer
+       :config
+       (add-hook 'racer-mode-hook #'eldoc-mode)
+       (add-hook 'racer-mode-hook #'company-mode)
+       (setq company-tooltip-align-annotations t)
+       :bind (:map rust-mode-map
+                   ("TAB" . company-indent-or-complete-common)
+                   ("C-c C-d" . racer-describe)))
+     #+END_SRC
+   - Update the ~rust-mode-hook~ to use ~racer-mode-hook~
+     #+BEGIN_SRC emacs-lisp
+     (use-package rust-mode
+       :config
+       (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+       (setq rust-format-on-save t)
+       (add-hook 'rust-mode-hook (lambda()
+                                   (cargo-minor-mode)
+                                   (racer-mode))))
+     #+END_SRC
