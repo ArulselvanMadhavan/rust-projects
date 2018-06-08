@@ -1,0 +1,18 @@
+* The Rust Programming language book
+** Installation
+   - Install rust
+     #+BEGIN_SRC bash
+     curl https://sh.rustup.rs -sSf | sh
+     #+END_SRC
+   - Install rustfmt
+     #+BEGIN_SRC rust
+     rustup component add rustfmt-preview
+     #+END_SRC
+   - Install ~rust-mode~ for emacs
+     #+BEGIN_SRC emacs-Lisp
+       (use-package rust-mode
+         :config
+         (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+         (setq rust-format-on-save t))
+     #+END_SRC
+   - [[https://github.com/ArulselvanMadhavan/dotfiles/blob/master/.emacs.d/configs/rust-configs.el][Link to emacs configs for rust programming]]
