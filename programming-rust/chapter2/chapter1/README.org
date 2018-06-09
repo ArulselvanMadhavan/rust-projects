@@ -1,0 +1,13 @@
+* A Tour of Rust
+** Macros
+   - Macros end with ~!~
+   - Example: ~assert!~, ~println!~
+   - Some macros are removed when the program is compiled for speed.
+     - For example: ~debug_assert!~, ~println!~
+** Attributes
+   - Attributes are an open-ended system for marking functions and
+     other declarations with extra information.
+   - Used to control compiler warnings, code style checks, include
+     code conditionally, tell Rust how to interact with code written
+     in other languages.
+   - Example: ~#[test]~ skipped from compilation of source.

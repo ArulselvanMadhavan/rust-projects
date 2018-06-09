@@ -78,3 +78,18 @@
                                    (cargo-minor-mode)
                                    (racer-mode))))
      #+END_SRC
+** What makes Rust unique?
+   - Ownership, moves and borrows.
+   - Ownership
+     - Establishes a clear lifetime for each value, making garbage
+       collection unnecessary in the core language, and enabling sound
+       but flexible instances for managing other sorts of resources
+       like sockets and file handles.
+   - Moves
+     - Transfer values from one owner to another.
+   - Borrows
+     - Allows code use a value temporarily without affectings its ownership.
+   - can check that your code locks the mutex while it accesses the data.
+   - can check that you don't use a data structure after you've given
+     to another thread.
+   - can check data races at compile time.

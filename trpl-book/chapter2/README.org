@@ -1,0 +1,3 @@
+* Programming a Guessing game
+** Associated function aka Static method
+   - ~::~ indicates calling an associated function.
