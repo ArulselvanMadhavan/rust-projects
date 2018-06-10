@@ -1,3 +1,5 @@
 * Programming a Guessing game
 ** Associated function aka Static method
    - ~::~ indicates calling an associated function.
+** Shadowing
+   - Allows us to save two different values inside a single variable name.

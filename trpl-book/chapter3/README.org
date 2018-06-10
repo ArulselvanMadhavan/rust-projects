@@ -1,0 +1,16 @@
+* Programming Concepts
+** Variables and Constants
+   - Constants are always immutable and must annotated with a type.
+   - Constants can be declared in any scope, including global scope.
+   - Variables can be shadowed using the ~let~ keyword.
+   - Shadowing is mostly used to allow transformations on a value.
+** Data types
+   - Scalar and Compound
+   - Scalar
+     - integers
+     - floating-point numbers
+     - booleans
+     - characters
+   - Compound
+     - tuple
+     - array
