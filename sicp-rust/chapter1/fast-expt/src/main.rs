@@ -20,20 +20,14 @@ fn fast_expt_rec(value: usize, n: usize) -> usize {
 // Takes more steps to converge.
 fn fast_expt_iter(value: usize, n: usize, mut counter: usize, mut result: usize) -> usize {
     loop {
-        let next_counter = counter * 2;
-        match next_counter.cmp(&n) {
-            Ordering::Less => {
-                counter = next_counter;
-                result = square(result);
-            }
+        counter = counter * 2;
+        match counter.cmp(&n) {
+            Ordering::Less => result = square(result),
             Ordering::Equal => {
                 result = square(result);
                 break;
             }
-            Ordering::Greater => {
-                result = result * fast_expt(value, n - counter);
-                break;
-            }
+            Ordering::Greater => result = result * fast_expt(value, counter - n),
         }
     }
     result
