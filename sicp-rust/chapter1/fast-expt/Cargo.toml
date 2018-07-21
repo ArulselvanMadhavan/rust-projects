@@ -1,0 +1,8 @@
+[package]
+name = "fast-expt"
+version = "0.1.0"
+authors = ["arul.madhavan"]
+
+[dependencies.num-integer]
+num-integer = "0.1.36"
+default-features = false
