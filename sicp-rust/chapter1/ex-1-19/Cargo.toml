@@ -1,0 +1,8 @@
+[package]
+name = "ex-1-19"
+version = "0.1.0"
+authors = ["arul.madhavan <arulselvan1234@gmail.com>"]
+
+[dependencies.num-integer]
+num-integer = "0.1.36"
+default-features = false
