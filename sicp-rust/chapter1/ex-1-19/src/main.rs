@@ -21,7 +21,6 @@ fn fib_iter(mut n: usize) -> usize {
     let mut p = 0usize;
     let mut q = 1usize;
     while n != 0 {
-        println!("{}", n);
         match n.is_even() {
             true => {
                 let new_p = p_prime(&p, &q);

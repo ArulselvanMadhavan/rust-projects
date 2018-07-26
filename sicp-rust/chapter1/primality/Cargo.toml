@@ -1,0 +1,10 @@
+[package]
+name = "primality"
+version = "0.1.0"
+authors = ["arul.madhavan <arulselvan1234@gmail.com>"]
+
+[dependencies.num-integer]
+version = "0.1.36"
+default-features = false
+[dependencies.rand]
+version = "0.5.4"
